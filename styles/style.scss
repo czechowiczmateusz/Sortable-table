@@ -1,0 +1,15 @@
+@import "reset";
+@import "header";
+@import "main";
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #5831fc;
+}
