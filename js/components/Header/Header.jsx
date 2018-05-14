@@ -17,7 +17,7 @@ class Header extends React.Component {
                     </g>
                 </g>
             </svg>
-            <h1>Lista Pracowników</h1>
+            <h1>Member List</h1>
         </header>
     }
 }

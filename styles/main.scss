@@ -39,6 +39,7 @@ main {
           border-right: 4px solid transparent;
           border-bottom: 4px solid #3A5071;
           margin-bottom: 2px;
+          cursor: pointer;
         }
         .arrow-down {
           width: 0;
@@ -46,6 +47,7 @@ main {
           border-left: 4px solid transparent;
           border-right: 4px solid transparent;
           border-top: 4px solid #3A5071;
+          cursor: pointer;
         }
       }
       td {
@@ -107,6 +109,7 @@ main {
     text-align: center;
     line-height: 22px;
     font-weight: bold;
+    cursor: pointer;
     .lt, .rt {
       color: white;
     }

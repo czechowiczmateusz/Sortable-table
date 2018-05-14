@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import moment from "moment";
-import Footer from './components/Footer/';
 import Header from './components/Header/';
 import Main from './components/Main/';
 require('.././styles/style.scss');
-moment.locale('pl');
+moment.locale('en');
 
 class App extends React.Component {
     render() {
@@ -13,7 +12,6 @@ class App extends React.Component {
             <div className="container">
                 <Header></Header>
                 <Main></Main>
-                <Footer></Footer>
             </div>
         );
     }

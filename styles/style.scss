@@ -1,9 +1,13 @@
 @import "reset";
 @import "header";
 @import "main";
+@font-face {
+  font-family: OpenSans;
+  src: url(./fonts/OpenSans-Regular.ttf);
+}
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: OpenSans;
 }
 
 .container {
