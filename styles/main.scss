@@ -101,21 +101,39 @@ main {
       }
       .number {
         width: 62px;
+        @media only screen and (max-device-width: $mobile-breakpoint) {
+          width: 100px;
+        }
       }
       .firstname {
         width: 142px;
+        @media only screen and (max-device-width: $mobile-breakpoint) {
+          width: 170px;
+        }
       }
       .lastname {
         width: 144px;
+        @media only screen and (max-device-width: $mobile-breakpoint) {
+          width: 160px;
+        }
       }
       .date {
         width: 186px;
+        @media only screen and (max-device-width: $mobile-breakpoint) {
+          width: 210px;
+        }
       }
       .company {
         width: 134px;
+        @media only screen and (max-device-width: $mobile-breakpoint) {
+          width: 150px;
+        }
       }
       .note {
         width: 133px;
+        @media only screen and (max-device-width: $mobile-breakpoint) {
+          width: 150px;
+        }
       }
       &:last-of-type {
         -webkit-box-shadow: 0 33px 48px -18px rgba(0,0,0,0.3);
