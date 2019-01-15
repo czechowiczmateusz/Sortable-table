@@ -14,7 +14,7 @@ main {
   align-items: center;
   table {
     width: 800px;
-    height: 336px;
+    height: 348.8px;
     tr {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -161,17 +161,10 @@ main {
       color: white;
     }
     .controls {
-      color: #262E00;
+      color: white;
     }
     .controls-active {
-      color: white;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      width: 70px;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      justify-content: center;
+      color: #262E00;
     }
     .lt, .rt {
       color: white;

@@ -1,47 +1,12 @@
-const webpack = require('webpack');
 
 module.exports = {
-    entry: ["whatwg-fetch", "./js/app.jsx"],
+    entry: ["whatwg-fetch", "./src/app.jsx"],
     output: {
         filename: "./js/out.js"
     },
-    devServer: {
-        inline: true,
-        contentBase: './',
-        port: 3001
-    },
     watch: true,
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            output: {
-                comments: false
-            },
-            mangle: true,
-            sourcemap: false,
-            debug: false,
-            minimize: true,
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true
-            }
-        }),
-        new webpack.optimize.AggressiveMergingPlugin(),
-    ],
     module: {
-        loaders: [{
+        rules: [{
             test: /\.jsx$/,
             exclude: /node_modules/,
             loader: 'babel-loader',
@@ -59,10 +24,12 @@ module.exports = {
                 }
             }, {
                 loader: 'sass-loader'
+            }, {
+                loader: 'postcss-loader'
             }]
         },
             {
-                test: /\.(png|jpg|gif|ttf)$/,
+                test: /\.(png|jpg|gif|ttf|svg|mp4)$/,
                 exclude: /node_modules/,
                 use: [
                     {

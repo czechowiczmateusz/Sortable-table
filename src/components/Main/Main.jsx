@@ -28,84 +28,132 @@ class Main extends React.Component {
     };
 
     handleSortIdAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {return a.id > b.id});
+        let sortedAsc = this.state.data.sort(function(a, b) {
+            if(a.id < b.id) { return -1; }
+            if(a.id > b.id) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedAsc
         })
     };
 
     handleSortIdDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {return a.id < b.id});
+        let sortedDesc = this.state.data.sort(function(a, b) {
+            if(a.id > b.id) { return -1; }
+            if(a.id < b.id) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedDesc
         })
     };
 
     handleSortFirstNameAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {return a.firstName > b.firstName});
+        let sortedAsc = this.state.data.sort(function(a, b) {
+            if(a.firstName < b.firstName) { return -1; }
+            if(a.firstName > b.firstName) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedAsc
         })
     };
 
     handleSortFirstNameDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {return a.firstName < b.firstName});
+        let sortedDesc = this.state.data.sort(function(a, b) {
+            if(a.firstName > b.firstName) { return -1; }
+            if(a.firstName < b.firstName) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedDesc
         })
     };
 
     handleSortLastNameAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {return a.lastName > b.lastName});
+        let sortedAsc = this.state.data.sort(function(a, b) {
+            if(a.lastName < b.lastName) { return -1; }
+            if(a.lastName > b.lastName) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedAsc
         })
     };
 
     handleSortLastNameDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {return a.lastName < b.lastName});
+        let sortedDesc = this.state.data.sort(function(a, b) {
+            if(a.lastName > b.lastName) { return -1; }
+            if(a.lastName < b.lastName) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedDesc
         })
     };
 
     handleSortBirthDateAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {return moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() > moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()});
+        let sortedAsc = this.state.data.sort(function(a, b) {
+            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() < moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return -1; }
+            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() > moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedAsc
         })
     };
 
     handleSortBirthDateDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {return moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() < moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()});
+        let sortedDesc = this.state.data.sort(function(a, b) {
+            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() > moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return -1; }
+            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() < moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedDesc
         })
     };
 
     handleSortCompanyAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {return a.company > b.company});
+        let sortedAsc = this.state.data.sort(function(a, b) {
+            if(a.company < b.company) { return -1; }
+            if(a.company > b.company) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedAsc
         })
     };
 
     handleSortCompanyDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {return a.company < b.company});
+        let sortedDesc = this.state.data.sort(function(a, b) {
+            if(a.company > b.company) { return -1; }
+            if(a.company < b.company) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedDesc
         })
     };
 
     handleSortNoteAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {return a.note > b.note});
+        let sortedAsc = this.state.data.sort(function(a, b) {
+            if(a.note < b.note) { return -1; }
+            if(a.note > b.note) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedAsc
         })
     };
 
     handleSortNoteDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {return a.note < b.note});
+        let sortedDesc = this.state.data.sort(function(a, b) {
+            if(a.note > b.note) { return -1; }
+            if(a.note < b.note) { return 1; }
+            return 0
+        });
         this.setState({
             data: sortedDesc
         })
@@ -136,7 +184,7 @@ class Main extends React.Component {
 
         const renderPagination = numbers.map(number => {
             return (
-                <li className="controls" key={number} id={number} onClick={this.handlePages}>
+                <li className={number === this.state.currentPage ? "controls controls-active" : "controls"} key={number} id={number} onClick={this.handlePages}>
                     {number}
                 </li>
             );
