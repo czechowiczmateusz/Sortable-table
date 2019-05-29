@@ -1,221 +1,156 @@
-import React from 'react';
-import moment from "moment";
-import data from "./../../../db/dane.json"
+import React, { useState, useMemo } from 'react'
+import moment from 'moment';
 moment.locale('pl');
 
-class Main extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: data,
-            currentPage: 1,
-            usersPerPage: 5
-        };
-    }
+const Main = ({ dataProps }) => {
+    const [data, setData] = useState(dataProps);
+    const [field, setField] = useState(null);
+    const [direction, setDirection] = useState(null);
 
-    handlePages = (e) => {
-        this.setState({
-            currentPage: Number(e.target.id)
-        });
-    };
-
-    handleNext = () => {
-        this.state.currentPage === 2 ? this.setState({currentPage: 1}) : this.setState({currentPage: this.state.currentPage + 1})
-    };
-
-    handleBack = () => {
-        this.state.currentPage === 1 ? this.setState({currentPage: 2}) : this.setState({currentPage: this.state.currentPage - 1})
-    };
-
-    handleSortIdAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {
-            if(a.id < b.id) { return -1; }
-            if(a.id > b.id) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedAsc
-        })
-    };
-
-    handleSortIdDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {
-            if(a.id > b.id) { return -1; }
-            if(a.id < b.id) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedDesc
-        })
-    };
-
-    handleSortFirstNameAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {
-            if(a.firstName < b.firstName) { return -1; }
-            if(a.firstName > b.firstName) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedAsc
-        })
-    };
-
-    handleSortFirstNameDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {
-            if(a.firstName > b.firstName) { return -1; }
-            if(a.firstName < b.firstName) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedDesc
-        })
-    };
-
-    handleSortLastNameAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {
-            if(a.lastName < b.lastName) { return -1; }
-            if(a.lastName > b.lastName) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedAsc
-        })
-    };
-
-    handleSortLastNameDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {
-            if(a.lastName > b.lastName) { return -1; }
-            if(a.lastName < b.lastName) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedDesc
-        })
-    };
-
-    handleSortBirthDateAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {
-            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() < moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return -1; }
-            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() > moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedAsc
-        })
-    };
-
-    handleSortBirthDateDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {
-            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() > moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return -1; }
-            if(moment(a.dateOfBirth, 'DD.MM.YYYY HH:mm').format() < moment(b.dateOfBirth, 'DD.MM.YYYY HH:mm').format()) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedDesc
-        })
-    };
-
-    handleSortCompanyAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {
-            if(a.company < b.company) { return -1; }
-            if(a.company > b.company) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedAsc
-        })
-    };
-
-    handleSortCompanyDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {
-            if(a.company > b.company) { return -1; }
-            if(a.company < b.company) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedDesc
-        })
-    };
-
-    handleSortNoteAsc = () => {
-        let sortedAsc = this.state.data.sort(function(a, b) {
-            if(a.note < b.note) { return -1; }
-            if(a.note > b.note) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedAsc
-        })
-    };
-
-    handleSortNoteDesc = () => {
-        let sortedDesc = this.state.data.sort(function(a, b) {
-            if(a.note > b.note) { return -1; }
-            if(a.note < b.note) { return 1; }
-            return 0
-        });
-        this.setState({
-            data: sortedDesc
-        })
-    };
-
-    render() {
-        const left = '<';
-        const right = '>';
-        const { data, currentPage, usersPerPage } = this.state;
-        const lastPage = currentPage * usersPerPage;
-        const firstPage = lastPage - usersPerPage;
-        const currentUsers = data.slice(firstPage, lastPage);
-        const renderUsers = currentUsers.map((user) => {
-            return <tr key={user.id}>
-                <td className="number">{user.id}</td>
-                <td className="firstname">{user.firstName}</td>
-                <td className="lastname">{user.lastName}</td>
-                <td className="date">{moment(user.dateOfBirth, 'DD.MM.YYYY HH:mm').format('LL')}</td>
-                <td className="company">{user.company}</td>
-                <td className="note">{user.note}</td>
-            </tr>
-        });
-
-        const numbers = [];
-        for (let i = 1; i <= Math.ceil(data.length / usersPerPage); i++) {
-            numbers.push(i);
+    const sortedAsc = useMemo(() => {
+        if (!field) return data;
+        if (field === 'id' || field === 'note') {
+            return data.slice().sort((a, b) => a[field] - b[field]);
+        } else if (field === 'dateOfBirth') {
+            return data.slice().sort((a, b) => {
+                if (moment(a[field], 'DD.MM.YYYY HH:mm').format() < moment(b[field], 'DD.MM.YYYY HH:mm').format()) {
+                    return -1;
+                }
+                if (moment(a[field], 'DD.MM.YYYY HH:mm').format() > moment(b[field], 'DD.MM.YYYY HH:mm').format()) {
+                    return 1;
+                }
+                return 0;
+            })
+        } else {
+            return data.slice().sort((a, b) => a[field].localeCompare(b[field]));
         }
+    }, [data, field]);
 
-        const renderPagination = numbers.map(number => {
-            return (
-                <li className={number === this.state.currentPage ? "controls controls-active" : "controls"} key={number} id={number} onClick={this.handlePages}>
-                    {number}
-                </li>
-            );
-        });
+    const sortedDesc = useMemo(() => {
+        if (!field) return data;
+        if (field === 'id' || field === 'note') {
+            return data.slice().sort((a, b) => b[field] - a[field]);
+        } else if (field === 'dateOfBirth') {
+            return data.slice().sort((a, b) => {
+                if (moment(b[field], 'DD.MM.YYYY HH:mm').format() < moment(a[field], 'DD.MM.YYYY HH:mm').format()) {
+                    return -1;
+                }
+                if (moment(b[field], 'DD.MM.YYYY HH:mm').format() > moment(a[field], 'DD.MM.YYYY HH:mm').format()) {
+                    return 1;
+                }
+                return 0;
+            })
+        } else {
+            return data.slice().sort((a, b) => b[field].localeCompare(a[field]));
+        }
+    }, [data, field]);
 
-        return (
-            <main>
-                <table>
-                    <thead>
-                    <tr>
-                        <th className="number">iD <div className="arrows"><div onClick={this.handleSortIdAsc} className="arrow-up"></div><div onClick={this.handleSortIdDesc} className="arrow-down"></div></div></th>
-                        <th className="firstname">First name <div className="arrows"><div onClick={this.handleSortFirstNameAsc} className="arrow-up"></div><div onClick={this.handleSortFirstNameDesc} className="arrow-down"></div></div></th>
-                        <th className="lastname">Last name <div className="arrows"><div onClick={this.handleSortLastNameAsc} className="arrow-up"></div><div onClick={this.handleSortLastNameDesc} className="arrow-down"></div></div></th>
-                        <th className="date">Birth date <div className="arrows"><div onClick={this.handleSortBirthDateAsc} className="arrow-up"></div><div onClick={this.handleSortBirthDateDesc} className="arrow-down"></div></div></th>
-                        <th className="company">Company <div className="arrows"><div onClick={this.handleSortCompanyAsc} className="arrow-up"></div><div onClick={this.handleSortCompanyDesc} className="arrow-down"></div></div></th>
-                        <th className="note">Note <div className="arrows"><div onClick={this.handleSortNoteAsc} className="arrow-up"></div><div onClick={this.handleSortNoteDesc} className="arrow-down"></div></div></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {renderUsers}
-                    </tbody>
-                </table>
-                <ul className="pagination">
-                    <li className="lt" onClick={this.handleBack}>{left} back</li>
-                    {renderPagination}
-                    <li className="rt" onClick={this.handleNext}>next {right}</li>
-                </ul>
-            </main>
-        );
-    }
-}
+    const sortedData = useMemo(() => {
+        if(!direction) return data;
+        if (direction) {
+            return sortedAsc
+        } else {
+            return sortedDesc
+        }
+    }, [data, direction]);
+
+    return (
+        <main>
+            <table>
+                <thead>
+                <tr>
+                    <th className="number">iD
+                        <div className="arrows">
+                            <div onClick={() => {
+                                setField('id');
+                                setDirection(true)
+                            }} className="arrow-up"/>
+                            <div onClick={() => {
+                                setField('id');
+                                setDirection(false)
+                            }} className="arrow-down"/>
+                        </div>
+                    </th>
+                    <th className="firstname">First name
+                        <div className="arrows">
+                            <div onClick={() => {
+                                setField('firstName');
+                                setDirection(true)
+                            }} className="arrow-up"/>
+                            <div onClick={() => {
+                                setField('firstName');
+                                setDirection(false)
+                            }} className="arrow-down"/>
+                        </div>
+                    </th>
+                    <th className="lastname">Last name
+                        <div className="arrows">
+                            <div onClick={() => {
+                                setField('lastName');
+                                setDirection(true)
+                            }} className="arrow-up"/>
+                            <div onClick={() => {
+                                setField('lastName');
+                                setDirection(false)
+                            }} className="arrow-down"/>
+                        </div>
+                    </th>
+                    <th className="date">Birth date
+                        <div className="arrows">
+                            <div onClick={() => {
+                                setField('dateOfBirth');
+                                setDirection(true)
+                            }} className="arrow-up"/>
+                            <div onClick={() => {
+                                setField('dateOfBirth');
+                                setDirection(false)
+                            }} className="arrow-down"/>
+                        </div>
+                    </th>
+                    <th className="company">Company
+                        <div className="arrows">
+                            <div onClick={() => {
+                                setField('company');
+                                setDirection(true)
+                            }} className="arrow-up"/>
+                            <div onClick={() => {
+                                setField('company');
+                                setDirection(false)
+                            }} className="arrow-down"/>
+                        </div>
+                    </th>
+                    <th className="note">Note
+                        <div className="arrows">
+                            <div onClick={() => {
+                                setField('note');
+                                setDirection(true)
+                            }} className="arrow-up"/>
+                            <div onClick={() => {
+                                setField('note');
+                                setDirection(false)
+                            }} className="arrow-down"/>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {sortedData.map((user) => {
+                    return (
+                        <tr key={user.id}>
+                            <td className="number">{user.id}</td>
+                            <td className="firstname">{user.firstName}</td>
+                            <td className="lastname">{user.lastName}</td>
+                            <td className="date">{moment(user.dateOfBirth, 'DD.MM.YYYY HH:mm').format('LL')}</td>
+                            <td className="company">{user.company}</td>
+                            <td className="note">{user.note}</td>
+                        </tr>
+                    )
+                })}
+                </tbody>
+            </table>
+        </main>
+    );
+};
 
 export default Main
 

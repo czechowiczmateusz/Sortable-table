@@ -11,21 +11,16 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
-                presets: ['es2015','stage-2', 'react']
+                presets: ['@babel/preset-env', '@babel/preset-react']
             }
         }, {
             test: /\.scss$/,
             use: [{
                 loader: 'style-loader'
             }, {
-                loader: 'css-loader',
-                options: {
-                    minimize: true
-                }
+                loader: 'css-loader'
             }, {
                 loader: 'sass-loader'
-            }, {
-                loader: 'postcss-loader'
             }]
         },
             {

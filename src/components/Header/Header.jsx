@@ -1,8 +1,8 @@
 import React from 'react';
 
-class Header extends React.Component {
-    render() {
-        return  <header>
+const Header = () => {
+    return (
+        <header>
             <svg width='84' height='54' viewBox='0 0 84 54' xmlns='http://www.w3.org/2000/svg'>
                 <g id='Page-1' fill='none' fillRule='evenodd'>
                     <g id='Recruitment_task' transform='translate(-470 -64)' fill='#FFF' fillRule='nonzero'>
@@ -19,8 +19,8 @@ class Header extends React.Component {
             </svg>
             <h1>Member List</h1>
         </header>
-    }
-}
+    )
+};
 
 export default Header
 
