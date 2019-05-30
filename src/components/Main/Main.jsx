@@ -58,6 +58,7 @@ const Main = ({ dataProps }) => {
     const additionalTableBackgroundColor = `#DAE0E9`;
     const textColor = `#3A5071`;
     const additionalTextColor = `#577198`;
+    const arrowSize = `10 px solid`;
 
     return (
         <main
@@ -108,18 +109,18 @@ const Main = ({ dataProps }) => {
                         .arrow-up {
                             width: 0;
                             height: 0;
-                            border-left: 10px solid transparent;
-                            border-right: 10px solid transparent;
-                            border-bottom: 10px solid ${textColor};
+                            border-left: ${arrowSize} transparent;
+                            border-right: ${arrowSize} transparent;
+                            border-bottom: ${arrowSize} ${textColor};
                             margin-bottom: 5px;
                             cursor: pointer;
                         }
                         .arrow-down {
                             width: 0;
                             height: 0;
-                            border-left: 10px solid transparent;
-                            border-right: 10px solid transparent;
-                            border-top: 10px solid ${textColor};
+                            border-left: ${arrowSize} transparent;
+                            border-right: ${arrowSize} transparent;
+                            border-top: ${arrowSize} ${textColor};
                             cursor: pointer;
                         }
                     }
