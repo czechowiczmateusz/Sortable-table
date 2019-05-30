@@ -1,14 +1,14 @@
 # Sortable-table
 
-Sortable table with pagination
+Sortable table
 
 ## Technology used:
 
 * HTML5
 * CSS3
-* SCSS
+* Emotion
 * JavaScript
-* React.js
+* React
 * Webpack
 
 ## Demo

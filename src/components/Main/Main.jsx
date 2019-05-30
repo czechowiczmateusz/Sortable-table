@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import moment from 'moment';
+import { jsx, css } from '@emotion/core';
 moment.locale('pl');
 
 const Main = ({ dataProps }) => {
@@ -46,17 +47,85 @@ const Main = ({ dataProps }) => {
     }, [data, field]);
 
     const sortedData = useMemo(() => {
-        if(!direction) return data;
         if (direction) {
             return sortedAsc
         } else {
             return sortedDesc
         }
-    }, [data, direction]);
+    }, [data, field, direction]);
+
+    const mainTableBackgroundColor = `#E5EEFB`;
+    const additionalTableBackgroundColor = `#DAE0E9`;
+    const textColor = `#3A5071`;
+    const additionalTextColor = `#577198`;
 
     return (
-        <main>
-            <table>
+        <main
+            css={css`
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            `}
+        >
+            <table
+                css={css`
+                width: 800px;
+                height: 100%;
+                tr {
+                    width: 100%;
+                    display: flex;
+                    &:last-of-type {
+                        box-shadow: 0 33px 48px -18px rgba(0,0,0,0.3);
+                    }
+                    &:last-child td.number {
+                        border-bottom-left-radius: 5px;
+                    }
+                    &:last-child td.note {
+                        border-bottom-right-radius: 5px;
+                    }
+                }
+                th {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 56px;
+                    width: 100%;
+                    background: ${mainTableBackgroundColor};
+                    border: 1px solid ${additionalTableBackgroundColor};
+                    font-weight: bold;
+                    font-size: 14px;
+                    letter-spacing: 0.66px;
+                    text-align: center;
+                    &:first-child {
+                        border-top-left-radius: 5px;
+                    }
+                    &:last-child {
+                        border-top-right-radius: 5px;
+                    }
+                    .arrows {
+                        padding-left: 10px;
+                        .arrow-up {
+                            width: 0;
+                            height: 0;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-bottom: 10px solid ${textColor};
+                            margin-bottom: 5px;
+                            cursor: pointer;
+                        }
+                        .arrow-down {
+                            width: 0;
+                            height: 0;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-top: 10px solid ${textColor};
+                            cursor: pointer;
+                        }
+                    }
+                }
+            `}
+            >
                 <thead>
                 <tr>
                     <th className="number">iD
@@ -133,10 +202,44 @@ const Main = ({ dataProps }) => {
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody
+                    css={css`
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        tr {
+                         &:nth-of-type(even) {
+                            td {
+                                background: #F1F6FC;
+                            }
+                         }
+                        }
+                    `}
+                >
                 {sortedData.map((user) => {
                     return (
-                        <tr key={user.id}>
+                        <tr key={user.id}
+                            css={css`
+                                td {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                    height: 56px;
+                                    width: 100%;
+                                    background: #FFFFFF;
+                                    border: 1px solid ${additionalTableBackgroundColor};
+                                    font-size: 16px;
+                                    color: ${additionalTextColor};
+                                    letter-spacing: 0.75px;
+                                    text-align: center;
+                                    &:nth-of-type(odd) {
+                                        font-weight: bold;
+                                    }
+                                }
+            `}
+                        >
                             <td className="number">{user.id}</td>
                             <td className="firstname">{user.firstName}</td>
                             <td className="lastname">{user.lastName}</td>
